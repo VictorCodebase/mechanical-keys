@@ -1,10 +1,19 @@
 import sqlite3
+import os
+import sys
 
+def resource_path(relative_path):
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS2 #if MEIPASS2 doesnt work, switch to MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
 
+    return os.path.join(base_path, relative_path)
 
 def connect():
     #! To test, please comment out the following line and comment the previous one to get the right path
-    connect = sqlite3.connect('db/preferences.db')
+    connect = sqlite3.connect(resource_path('db/preferences.db'))
     #connect = sqlite3.connect('preferences.db')
     cursor = connect.cursor() # (to me) behaves like a pointer
     return connect, cursor

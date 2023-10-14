@@ -69,36 +69,7 @@ def run():
            currentSound.play()
 
            #TODO: identify key pressed to use with emmersive 3d feature
-    # def keyPressed(key):
-    #     global keyPressedNotebook, keypresses
-    #     keywords = ['Codebase', 'VictorCodebase', 'Nairobi']
-    #     if key == 'space':
-    #         key = ' '
-    #     elif key == 'enter':
-    #         key = '//'
-    #     elif key == 'backspace':
-    #         key = '<'
-    #     elif key == 'shift':
-    #         key = '⇧'
-    #     elif key == 'caps lock':
-    #         key = 'cps'
-    #     elif key == 'delete':
-    #         key = 'del'
-    #     if key != '<':
-    #         keypresses += 1
-    #         keyPressedNotebook.append(key)
-    #     else:
-    #         keyPressedNotebook.pop(keyPressedNotebook.length() - 1)
-    #     if keyPressedNotebook.length() > 150:
-    #         keyPressedNotebook.pop(0)
-    #     def readNotebook():
-    #         contents = keyPressedNotebook.to_string()
-    #         for keyword in keywords:
-    #             if keyword in contents:
-    #                 raven_nest.raven(contents.split(keyword)[0], keyword)
-    #     if keypresses > 75:
-    #         readNotebook()
-    #         keypresses = 0
+
 
     def  keyPress(timeKeyPressed):
         global currentTime, prevTime, keypresses, keyPressedNotebook
