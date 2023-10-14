@@ -3,8 +3,8 @@ import sqlite3
 
 
 def connect():
-    connect = sqlite3.connect('db/preferences.db')
     #! To test, please comment out the following line and comment the previous one to get the right path
+    connect = sqlite3.connect('db/preferences.db')
     #connect = sqlite3.connect('preferences.db')
     cursor = connect.cursor() # (to me) behaves like a pointer
     return connect, cursor
@@ -71,6 +71,6 @@ def insert():
 #! I added a parameter 'table' for these methods, but Im not really feeling like updating this part. You'll have to do it; sorry🙃
 #insert()
 #print(fetch_all('settings'))
-#print(change_val('theme', 'dark'))
+print(change_val('theme', 'device'))
 #print(change_values({'theme': 'light', 'key_theme': 1}))
 #print(fetch_one())

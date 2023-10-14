@@ -6,7 +6,6 @@ from linkedlist import *
 import themes
 import home
 import utility as util
-import settings as settings
 import keyResponse as kResponse
 import dynamicVolume as dVolume
 import sys
@@ -24,6 +23,7 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 
+util.global_settings_init()
 
 
 Logo = resource_path("Logo.png")
@@ -31,12 +31,10 @@ window = tk.Tk()
 window.title("Mechanical Keys Simulator")
 window.geometry("566x339")
 window.configure(bg=themes.theme.primaryColor())
-
+#window.configure(bg='red')
 #window.iconbitmap(resource_path("Logo.ico"))
 window.resizable(False, False)
 
-
-util.global_settings_init()
 
 home.home(window)
 kResponse.run()

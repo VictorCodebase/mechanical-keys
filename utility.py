@@ -1,4 +1,5 @@
 import home as home
+import themes as themes
 import settings as settings
 import keyResponse as kResponse
 import dynamicVolume as dVolume
@@ -8,7 +9,7 @@ import dynamicVolume as dVolume
 def global_settings_init():
     dVolume.settingsInit()
     kResponse.settingsInit()
-    #settings.settingsInit()
+    themes.settingsInit()
     home.settingsInit()
 
 def partial_settings_init(module):

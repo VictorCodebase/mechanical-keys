@@ -22,7 +22,6 @@ def get_dynamic_volume():
     if system_volume is not None:
         scaling_factor = 1.0 - (system_volume / 100.0)
         key_volume = current_volume - (scaling_factor / 2.0) #! alter to change volume
-        print(f"System volume: {system_volume}, key volume: {key_volume}")
         return float('{:.2f}'.format(key_volume))
 
 def get_sys_vol():

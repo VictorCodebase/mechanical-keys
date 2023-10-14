@@ -1,16 +1,26 @@
 from winreg import ConnectRegistry, OpenKey, QueryValueEx, HKEY_CURRENT_USER
+import db.db as db
 import sys
 
 
 themes = {
     "light": "#FFFFFF",
     "lightSecondary": "#F0F0F0",
-    "lightText": "#1E1E1E",
+    "lightLowContrast": "#909090",
+    "lightHighContrast": "#1E1E1E",
     
     "dark": "#1E1E1E",
     "darkSecondary": "#545454",
-    "darkText": "#F0F0F0"
+    "darkLowContrast": "#909090",
+    "darkHighContrast": "#F0F0F0"
 }
+
+app_theme = 'device'
+def settingsInit():
+    db.connect()
+    global app_theme
+    app_theme = db.fetch_one('settings', 'theme')
+    print(app_theme)
     
 class theme:
 
@@ -26,24 +36,60 @@ class theme:
             return default
     
     def primaryColor():
-        global themes
-        if theme.get_sys_theme():
+        global themes, app_theme
+        if app_theme == 'device':
+            if theme.get_sys_theme():
+                return themes["light"]
+            else:
+                return themes["dark"]
+        elif app_theme == 'light':
             return themes["light"]
-        else:
+        elif app_theme == 'dark':
             return themes["dark"]
+        else:
+            return themes["light"]
+    
         
     def secondaryColor():
-        global themes
-        if theme.get_sys_theme():
+        global themes, app_theme
+        if app_theme == 'device':
+            if theme.get_sys_theme():
+                return themes["lightSecondary"]
+            else:
+                return themes["darkSecondary"]
+        elif app_theme == 'light':
             return themes["lightSecondary"]
-        else:
+        elif app_theme == 'dark':
             return themes["darkSecondary"]
-    
-    def textColor():
-        global themes
-        if theme.get_sys_theme():
-            return themes["lightText"]
         else:
-            return themes["darkText"]
+            return themes["lightSecondary"]
+    
+    def lowContrast():
+        global themes, app_theme
+        if app_theme == 'device':
+            if theme.get_sys_theme():
+                return themes["lightLowContrast"]
+            else:
+                return themes["darkLowContrast"]
+        elif app_theme == 'light':
+            return themes["lightLowContrast"]
+        elif app_theme == 'dark':
+            return themes["darkLowContrast"]
+        else:
+            return themes["lightLowContrast"]
+    
+    def highContrast():
+        global themes, app_theme
+        if app_theme == 'device':
+            if theme.get_sys_theme():
+                return themes["lightHighContrast"]
+            else:
+                return themes["darkHighContrast"]
+        elif app_theme == 'light':
+            return themes["lightHighContrast"]
+        elif app_theme == 'dark':
+            return themes["darkHighContrast"]
+        else:
+            return themes["lightHighContrast"]
     def warn():
         return "#FF0000"

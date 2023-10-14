@@ -2,6 +2,7 @@ from tkinter import *
 from themes import *
 import settings as settings
 import db.db as db
+import construct as construct
 from keyResponse import *
 from PIL import ImageTk, Image
 import sys
@@ -23,7 +24,7 @@ def settingsInit():
     global current_theme
     current_theme = db.fetch_one('settings', 'key_theme')
     print(current_theme)
-settingsInit()
+#settingsInit()
 def home(window):
     
     def openSettings(arg):
@@ -33,51 +34,11 @@ def home(window):
     # settingsImg = ImageTk.PhotoImage(stsImage)
     img = PhotoImage(file=resource_path("./images/light_mode_settings.png"))
 
-    #?word per minute display
-    Label(
-        window, 
-        text="23", 
-        bg= theme.primaryColor(), 
-        fg=theme.textColor(), 
-        font=("Inter", 80, 'bold')
-        ).place(x =29, y = 53)
-    Label(
-        window, 
-        text="Avg", 
-        bg= theme.primaryColor(), 
-        fg=theme.textColor(), 
-        font=("Inter", 20)
-        ).place(x =155, y = 90)
-    Label(
-        window, 
-        text="WPM", 
-        bg= theme.primaryColor(), 
-        fg=theme.textColor(), 
-        font=("Inter", 20)
-        ).place(x =155, y = 127)
-
-    #?fastest word per minute display   
-    Label(
-        window, 
-        text="96", 
-        bg= theme.primaryColor(), 
-        fg=theme.textColor(), 
-        font=("Inter", 80, 'bold')
-        ).place(x =29, y = 180)
-    Label(
-        window, 
-        text="Fastest", 
-        bg= theme.primaryColor(), 
-        fg=theme.textColor(), 
-        font=("Inter", 20)
-        ).place(x =155, y = 217)
-    Label(
-        window, 
-        text="WPM", 
-        bg= theme.primaryColor(), 
-        fg=theme.textColor(), 
-        font=("Inter", 20)
-        ).place(x =155, y = 254)
+    #?Giant wpm and fwpm display
+    construct.construct_lables(window, ["23", "96"], 29, 53, ["Inter", 80, 'bold'], theme.primaryColor(), theme.highContrast(), 'w', True, 0, 127)
+    #?smaller wpm and fwpm display
+    construct.construct_lables(window, ["Avg", "WPM"], 155, 90, ["Inter", 20, 'normal'], theme.primaryColor(), theme.highContrast(), 'w', False, 0, 37)
+    construct.construct_lables(window, ["Fastest", "WPM"], 155, 217, ["Inter", 20, 'normal'], theme.primaryColor(), theme.highContrast(), 'w', False, 0, 37)
 
     #? Change keyboard sound menu
 
@@ -92,138 +53,145 @@ def home(window):
         width=21,
         height=1,
         cursor='hand2',
-        fg=theme.textColor(),
-        background=theme.primaryColor(),
+        fg=theme.highContrast(),
+        background=theme.secondaryColor(),
         font=("Inter", 15),
         activebackground=theme.primaryColor(),
-        activeforeground=theme.textColor(),
+        activeforeground=theme.highContrast(),
         borderwidth=1,
         highlightthickness=1,
-        highlightbackground=theme.textColor()  # Specify the outline color here
+        highlightbackground=theme.highContrast()  # Specify the outline color here
     )
     settingsBtn.place(x=300, y=26)
     settingsBtn.bind("<Button-1>", openSettings)
-    
-    # settingsIcon = Canvas(
-    #     window,
-    #     width=stsImage.width,
-    #     height=stsImage.height,
-    # )
-    # settingsIcon.place(x= 500, y= 50)
-    # settingsIcon.create_image(0,0,anchor=tk.NW, image=settingsImg)
-    #Im really sorry. I really tried to get a transparent icon here, but its too much work. Feel free to do that. Ill make custom icons instead
-
-    # Label(
-    #     window,
-    #     image=img
-    # ).place(x= 500, y= 50)
-
-
 
 
     # button styling
     button_width = 21
     button_height = 2
+    starting_x = 300
+    starting_y = 106
     button_spacing = 70
     font_size = 15
     type_face = "Inter"
     border_width = 1
     highlight_thickness = 1
     
-    Sound_1 = Label(
-        window,
-        text="Thock",
-        bg=theme.secondaryColor(),
-        width=button_width,
-        height=button_height,
-        fg=theme.textColor(),
-        font=(type_face, font_size),
-        activebackground=theme.primaryColor(),
-        activeforeground=theme.textColor(),
-        borderwidth=border_width,
-        highlightthickness=highlight_thickness,
-        highlightbackground=theme.textColor()  
-    )
+    # Sound_1 = Label(
+    #     window,
+    #     text="Thock",
+    #     bg=theme.secondaryColor(),
+    #     width=button_width,
+    #     height=button_height,
+    #     fg=theme.highContrast(),
+    #     font=(type_face, font_size),
+    #     activebackground=theme.primaryColor(),
+    #     activeforeground=theme.highContrast(),
+    #     borderwidth=border_width,
+    #     highlightthickness=highlight_thickness,
+    #     highlightbackground=theme.lowContrast()  
+    # )
     
-    ###########Hello. I am here to remind you that you look pretty today✨. Have a nice day.###########
+    # ###########Hello. I am here to remind you that you look pretty today✨. Have a nice day.###########
 
-    Sound_2 = Label(
-        window,
-        text="Raining glass marble",
-        bg=theme.secondaryColor(),
-        width=button_width,
-        height=button_height,
-        fg=theme.textColor(),
-        font=(type_face, font_size),
-        activebackground=theme.primaryColor(),
-        activeforeground=theme.textColor(),
-        borderwidth=border_width,
-        highlightthickness=highlight_thickness,
-        highlightbackground=theme.textColor()  
-    )
-    Sound_3 = Label(
-        window,
-        text="1980's typwriter",
-        bg=theme.secondaryColor(),
-        width=button_width,
-        height=button_height,
-        fg=theme.textColor(),
-        font=(type_face, font_size),
-        activebackground=theme.primaryColor(),
-        activeforeground=theme.textColor(),
-        borderwidth=border_width,
-        highlightthickness=highlight_thickness,
-        highlightbackground=theme.textColor()  
-    )
+    # Sound_2 = Label(
+    #     window,
+    #     text="Raining glass marble",
+    #     bg=theme.secondaryColor(),
+    #     width=button_width,
+    #     height=button_height,
+    #     fg=theme.highContrast(),
+    #     font=(type_face, font_size),
+    #     activebackground=theme.primaryColor(),
+    #     activeforeground=theme.highContrast(),
+    #     borderwidth=border_width,
+    #     highlightthickness=highlight_thickness,
+    #     highlightbackground=theme.lowContrast()  
+    # )
+    # Sound_3 = Label(
+    #     window,
+    #     text="1980's typwriter",
+    #     bg=theme.secondaryColor(),
+    #     width=button_width,
+    #     height=button_height,
+    #     fg=theme.highContrast(),
+    #     font=(type_face, font_size),
+    #     activebackground=theme.primaryColor(),
+    #     activeforeground=theme.highContrast(),
+    #     borderwidth=border_width,
+    #     highlightthickness=highlight_thickness,
+    #     highlightbackground=theme.lowContrast()  
+    # )
     
 
-
-    buttons = [Sound_1, Sound_2, Sound_3]
-    def place_buttons(spacing, starting_x=300, starting_y=106):
-        for i in range(len(buttons)):
-            buttons[i].place(x=starting_x, y=starting_y + spacing * i)
+    #construct.construct_buttons retunrs a string of buttons
+    buttons = construct.construct_buttons(
+        window, 
+        ["Thock", "Raining glass marble", "1980's typwriter"], 
+        starting_x, 
+        starting_y, 
+        button_width, 
+        button_height,
+        ["Inter", font_size, 'normal'], 
+        theme.secondaryColor(), 
+        theme.highContrast(), 
+        theme.lowContrast(),
+        highlight_thickness,
+        border_width,
+        'w', 
+        0, 
+        button_spacing)
+    
+    def change_highlighted_btn(button_num):
+        buttons[current_theme - 1].config(bg=theme.secondaryColor())
+        buttons[current_theme - 1].config(highlightbackground=theme.lowContrast())
+        buttons[button_num].config(bg=theme.primaryColor())
+        buttons[button_num].config(highlightbackground=theme.highContrast())
+    
+    def highlight_button(button_num):
+        buttons[button_num].config(bg=theme.primaryColor())
+        buttons[button_num].config(highlightbackground=theme.highContrast())
+    
+    def bind_buttons():
+        print (buttons)
 
         #? Remember to manually bind funtionality here
+        # index = 0
+        # methods = [thock_theme, raining_glass_theme, typwriter_theme]
+        # while index is not len(buttons) - 1:
+        #     buttons[index].bind("<Button-1>", methods)
+        #     index += 1
         buttons[0].bind("<Button-1>", thock_theme)
         buttons[1].bind("<Button-1>", raining_glass_theme)
         buttons[2].bind("<Button-1>", typwriter_theme)
         #? Selected theme button changes colour here
-        buttons[current_theme - 1].config(bg=theme.primaryColor())
+        highlight_button(current_theme - 1)
 
-
+    #TODO: allow users to play demo sounds
     def thock_theme(arg):
         global current_theme
         themeNum = 1
         button_num = 0
-        buttons[current_theme - 1].config(bg=theme.secondaryColor())
-        buttons[button_num].config(bg=theme.primaryColor())
+        change_highlighted_btn(button_num)
         db.change_val('key_theme', themeNum)
-
-            #TODO: allow users to play demo sounds
-            # currentSound = pygame.mixer.Sound(resource_path(f'{currentTheme}key-1.wav'))
-            # currentSound.set_volume(dynamicVolume.get_dynamic_volume())
-            # #currentSound.set_volume(1)
-            # currentSound.play()
         restart(arg)
-
 
     def raining_glass_theme(arg):
         themeNum = 2
         button_num = 1
-        buttons[current_theme - 1].config(bg=theme.secondaryColor())
-        buttons[button_num].config(bg=theme.primaryColor())
+        change_highlighted_btn(button_num)
         db.change_val('key_theme', themeNum)
         restart(arg)
 
     def typwriter_theme(arg):
         themeNum = 3
         button_num = 2
-        buttons[current_theme - 1].config(bg=theme.secondaryColor())
-        buttons[button_num].config(bg=theme.primaryColor())
+        change_highlighted_btn(button_num)
         db.change_val('key_theme', themeNum)
         restart(arg)
 
-    place_buttons(button_spacing)
+    bind_buttons()
+
 
     def restart(arg):
         restart_warnign.config(text="* Restarting to apply changes")
@@ -232,7 +200,7 @@ def home(window):
     def perform_restart():
         os.execl(sys.executable, sys.executable, *sys.argv)
         
-#ajndksndaondisbdj jsdnjnkansansdck o naskdmklamdkaklmmksmdak
+
 
     #? Restart warning
     #TODO: Let user choose to restart but give option to automatically restart next time
